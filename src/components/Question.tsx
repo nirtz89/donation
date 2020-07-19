@@ -4,14 +4,6 @@ import { IQuestionType, IQuestion, ITransportationType } from '../App';
 
 function Question(props) {
 
-    // function createSelectItems() {
-    //     let items = [];
-    //     for (let item in ITransportationType) {
-    //         items.push(<option value={item}>{item}</option>);
-    //     }
-    //     return items;
-    // };
-
     const makeQuestion = (question: IQuestion) => {
         let toReturn: any;
         switch (question.type) {

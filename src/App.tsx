@@ -63,7 +63,7 @@ function App() {
     {
       guid: uuidv4(),
       type: IQuestionType.Hours,
-      question: 'At what hours? (or how long)'
+      question: 'At what hours?'
     },
     {
       guid: uuidv4(),
