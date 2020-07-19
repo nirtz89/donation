@@ -4,11 +4,18 @@ import './Container.scss';
 import AppCalendar from './AppCalendar';
 import AppMap from './AppMap';
 
+function addDays(date: Date, days: number) {
+    return new Date(date.getTime() + days*24*60*60*1000);
+}
+
 function Container(props) {
+    const startDate = addDays(new Date(), -2);
+    const endDate = addDays(startDate, 10);
+
   return (
     <>
     <div className="Container">
-      <AppCalendar />
+      <AppCalendar start={startDate} end={endDate}/>
       <Main questions={props.questions} />
       <AppMap />
     </div>
