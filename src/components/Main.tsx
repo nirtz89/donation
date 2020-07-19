@@ -4,9 +4,19 @@ import './Main.scss';
 import Progressbar from './Progressbar';
 import Question from './Question';
 
-function Main(props) {
+const Main = (props) => {
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  const nextClicked = () => {
+    setCurrentQuestion(currentQuestion + 1);
+
+    const progressAddition = progress + ( 1 / (props.questions.length * 14));
+    setProgress(progressAddition);
+    const dispaly = (Math.round(progressAddition * 100) / 100).toFixed(2);
+    console.debug('progess bar: ' + dispaly);
+  };
 
   return (
     <div className="Main">
@@ -18,9 +28,9 @@ function Main(props) {
             'no questions :('
             }
         </div>
-        {props.questions[currentQuestion] && <button onClick={()=>setCurrentQuestion(currentQuestion+1)}>NEXT</button>}
+        {props.questions[currentQuestion] && <button onClick={nextClicked}>NEXT</button>}
     </div>
   );
-}
+};
 
 export default Main;
