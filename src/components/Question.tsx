@@ -1,44 +1,61 @@
 import React from 'react';
 import './Question.scss';
-import { EQuestionType, IQuestion } from '../App';
+import { IQuestionType, IQuestion, ITransportationType } from '../App';
 
 function Question(props) {
+
+    // function createSelectItems() {
+    //     let items = [];
+    //     for (let item in ITransportationType) {
+    //         items.push(<option value={item}>{item}</option>);
+    //     }
+    //     return items;
+    // };
 
     const makeQuestion = (question: IQuestion) => {
         let toReturn: any;
         switch (question.type) {
-            case EQuestionType.Bool:
+            case IQuestionType.Bool:
                 toReturn = (<>
                 <button className="Button secondary">NO</button>
                 <button className="Button primary">YES</button>
                 </>)
             break;
-            case EQuestionType.Location:
+            case IQuestionType.Location:
                 toReturn = (<>
                     <input placeholder="LOCATION"/>
                     </>)
             break;
-            case EQuestionType.Number:
+            case IQuestionType.Number:
                 toReturn = (<>
                     <input type="number" placeholder="NUMBER"/>
                     </>)
             break;
-            case EQuestionType.Hours:
+            case IQuestionType.Hours:
                 toReturn = (<>
                     <input type="number" placeholder="FROM"/>
                     <input type="number" placeholder="TO"/>
                     </>)
             break;
-            case EQuestionType.People:
+            case IQuestionType.People:
                 toReturn = (<>
                     <input placeholder="PEOPLE"/>
                     </>)
             break;
-            case EQuestionType.Transportation:
-                toReturn = (<>
-                    <select><option value="bus">Bus</option>
-                    <option value="bus">Taxi</option></select>
-                    </>)
+            case IQuestionType.Transportation:
+                let items: any[] = [];
+                let index = 0;
+                for (let item in ITransportationType) {
+                    items.push(<option key={index}>{item}</option>);
+                    index++;
+                }
+                toReturn = (
+                <>
+                    <select >
+                        {items}
+                    </select>
+                </>
+                )
             break;
         }
         return toReturn;

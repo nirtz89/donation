@@ -20,19 +20,18 @@ export interface IEvent {
   answeres: Record<number, IQuestion>;
   date: Date;
   people: IPeople[],
-  transportationFrom: ETransportationType;
-  transportationTo: ETransportationType;
+  transportation: ITransportationType;
 }
 
 export interface IQuestion {
   guid: string;
-  type: EQuestionType,
+  type: IQuestionType,
   question: string,
   condition?: string,
   followUp?: IQuestion[]
 }
 
-export enum EQuestionType {
+export enum IQuestionType {
   Bool,
   Hours,
   Location,
@@ -41,11 +40,11 @@ export enum EQuestionType {
   Transportation
 }
 
-enum ETransportationType {
-  Taxi,
-  Bus,
-  Walk,
-  Bycicle
+export enum ITransportationType {
+  Taxi = "taxi",
+  Bus = "bus",
+  Walk = "walking",
+  Bicycle = "bicycle"
 }
 
 function App() {
@@ -53,35 +52,35 @@ function App() {
   const questions: IQuestion[] = [
     {
       guid: uuidv4(),
-      type: EQuestionType.Location,
+      type: IQuestionType.Location,
       question: 'Where have you been?'
     },
     {
       guid: uuidv4(),
-      type: EQuestionType.Bool,
+      type: IQuestionType.Bool,
       question: 'Did you wear a mask?'
     },
     {
       guid: uuidv4(),
-      type: EQuestionType.Hours,
+      type: IQuestionType.Hours,
       question: 'At what hours? (or how long)'
     },
     {
       guid: uuidv4(),
-      type: EQuestionType.Number,
+      type: IQuestionType.Number,
       question: 'How many people were there with you?',
       condition: '> 0',
       followUp: [
         {
           guid: uuidv4(),
-          type: EQuestionType.People,
-          question: 'Please fill in the people that you know that were with you',
+          type: IQuestionType.People,
+          question: 'Please fill in the people that you know were there',
         }
       ]
     },
     {
       guid: uuidv4(),
-      type: EQuestionType.Transportation,
+      type: IQuestionType.Transportation,
       question: 'How did you get there?'
     }
   ]
