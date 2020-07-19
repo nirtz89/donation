@@ -13,7 +13,7 @@ type State = {
 
 export class SimpleExample extends Component<{}, State> {
   mapRef: React.RefObject<any>;
-  
+
   constructor(props) {
     super(props);
     this.mapRef = React.createRef();
@@ -35,7 +35,7 @@ export class SimpleExample extends Component<{}, State> {
             results.addLayer(L.marker(data.results[i].latlng));
         }
     });
-  } 
+  }
 
   render() {
     const position = [this.state.lat, this.state.lng]
