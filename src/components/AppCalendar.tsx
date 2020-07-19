@@ -3,12 +3,12 @@ import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { Badge } from '@material-ui/core';
 
-export interface ICalendatProps {
+export interface ICalendarProps {
     start: Date;
     end: Date;
 }
 
-const AppCalendar = (props: ICalendatProps) => {
+const AppCalendar = (props: ICalendarProps) => {
     const [clickedDate, setClickedDate] = useState(props.start);
 
     const handleChange = (date: any) => {
