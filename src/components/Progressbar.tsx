@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Progressbar.scss';
 
-function Progressbar() {
+function Progressbar({questions}) {
 
     const [width, setWidth] = useState(0);
 
