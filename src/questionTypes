@@ -1,0 +1,33 @@
+1.yes/no (e.g: did your wear a mask?)
+2.fill human
+    full name
+    phone number
+    id
+3.hours of vist
+    from -> to OR X mintues
+4. transporation (e.g how did u get there)
+    bus (follow up question -> bus type by enum + what line )
+    walk
+    car
+    bike
+    taxy
+5. location
+    auto comp via map
+    type of place enum (hospital, pool, clinic, gym, ocean etc...)
+6. how many people were there
+    int
+
+
+
+event (circle) data:
+
+1. type of event / location
+2. on what time / how long
+3. how many poeple were there -> #ppl
+    if #ppl > 0 & time > 10 min
+        3.1 did you wear a mask
+        if (!mask) // or always
+            fill in humans
+4. transporation to that event + follow up questions if it was bus/ taxy
+    how many ppl on the bus / taxy, lines etc..
+    transporation back home
