@@ -21,7 +21,7 @@ const Main = (props: IMainProps) => {
         <EventTimeline appState={props.appState} setAppState={props.setAppState} />
         <div className="QuestionWrapper">
             {props.appState.questions[currentQuestion] ?
-            <Question question={props.appState.questions[currentQuestion]} location={props.location} setLocation={props.setLocation} />
+            <Question question={props.appState.questions[currentQuestion]} location={props.location} setLocation={props.setLocation} {...props} />
             :
             'no questions :('
             }
