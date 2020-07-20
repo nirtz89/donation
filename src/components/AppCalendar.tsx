@@ -41,6 +41,6 @@ const AppCalendar = (props: ICalendarProps) => {
         />
     </MuiPickersUtilsProvider>
     );
-  };
+};
 
 export default AppCalendar;

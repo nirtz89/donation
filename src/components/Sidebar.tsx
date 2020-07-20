@@ -8,7 +8,7 @@ function Sidebar(props) {
   return (
     <div className="Sidebar">
         <div className="Sidebar-top">
-          <Progressbar appState={props.appState}/>
+          <Progressbar days={props.appState.days}/>
           <AppCalendar start={props.startDate} end={props.endDate} />
         </div>
         <div className="Sidebar-bottom">
