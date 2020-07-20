@@ -17,6 +17,8 @@ const AppCalendar = (props: ICalendarProps) => {
 
     const handleChange = (date: any) => {
         setClickedDate(date); // set current date here - points to the dic
+        const newState = { ...props.appState, currentDate: date };
+        props.setAppState(newState);
     };
 
     const isSameDayInMonth = (date1: Date, date2: Date) => {

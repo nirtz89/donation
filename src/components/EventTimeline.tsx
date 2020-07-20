@@ -16,21 +16,28 @@ function EventTimeline(props: { appState: IAppState, setAppState: Dispatch<SetSt
     props.setAppState(newState);
   };
 
-  const onAddClick =() => {
+  const addEvent =() => {
     const newEvent: Partial<IEvent> = {
       guid: uuidv4()
     };
     const newState =  { ...props.appState };
+    if (!newState.days[props.appState.currentDate!]) {
+      newState.days = { ...newState.days, [props.appState.currentDate!]: { events: [], done: false } };
+    }
     newState.days[props.appState.currentDate!].events.push(newEvent as any);
     newState.currentEvent = newEvent.guid;
     props.setAppState(newState);
   };
 
+  if (props.appState.days && (!props.appState.days[props.appState.currentDate!] || !props.appState.days[props.appState.currentDate!].events.length)) {
+    addEvent();
+  }
+
   return (
     <div className="EventTimeline" ref={eventTimeLineRef}>
-        {props.appState.days && props.appState.days[props.appState.currentDate!].events.map((event, index)=>
-          <Event key={index} isCurrent={event.guid === props.appState.currentEvent} event={event} onClick={() => onEventClick(event.guid)} />)}
-        <Button onClick={onAddClick} >
+        {props.appState.days && props.appState.days[props.appState.currentDate!] && props.appState.days[props.appState.currentDate!].events.map((event, index)=>
+        <Event key={index} isCurrent={event.guid === props.appState.currentEvent} event={event} onClick={() => onEventClick(event.guid)} />)}
+        <Button onClick={addEvent} >
           <AddCircleOutlineIcon style={{ width: '57px', height: '40px'}} />
         </Button>
     </div>
