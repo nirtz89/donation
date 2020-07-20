@@ -3,7 +3,7 @@ import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { Badge } from '@material-ui/core';
 import moment from 'moment';
-import { IDay, IAppState } from '../App';
+import { IAppState } from '../App';
 
 export interface ICalendarProps {
     startDate: Date;
@@ -21,6 +21,11 @@ const AppCalendar = (props: ICalendarProps) => {
         props.setAppState(newState);
     };
 
+    const isDoneDay = (date: Date) => {
+        const day = props.appState.days[date.toLocaleDateString()];
+        return day && day.done;
+    }
+
     const isSameDayInMonth = (date1: Date, date2: Date) => {
         return moment(date1).format('YYYY-MM-DD') === moment(date2).format('YYYY-MM-DD');
     }
@@ -37,10 +42,14 @@ const AppCalendar = (props: ICalendarProps) => {
               maxDate={props.endDate}
               minDate={props.startDate}
               renderDay={(day, selectedDate, isInCurrentMonth, dayComponent) => {
-                // after redux -> set badge to compleated days = with at least 1 event
-                const isStart = isInCurrentMonth && day && isSameDayInMonth(day, props.startDate);
-                const isEnd = isInCurrentMonth && day && isSameDayInMonth(day, props.endDate);
-                return <Badge style={{color: 'green'}} badgeContent={isStart ? "✔" : isEnd ?  "✔" : undefined}>{dayComponent}</Badge>;
+                let valid = isInCurrentMonth && day && moment(day).isBetween(moment(props.startDate), moment(props.endDate));
+                if (day && isSameDayInMonth(day, props.startDate)) {
+                    valid = true;
+                }
+                // looks to much pending icons...
+                // const pending = valid && day && !isDoneDay(day);
+                const done = valid && day && isDoneDay(day);
+                return <Badge style={{color: 'green'}} badgeContent={!valid ? undefined : done ?  "✔" : undefined}>{dayComponent}</Badge>;
               }}
         />
     </MuiPickersUtilsProvider>
