@@ -69,7 +69,7 @@ export interface IAppState {
   days: Record<string, IDay>; // key date string
   questions: IQuestion[];
   currentDate: string;
-  currentEvent?: string;
+  currentEvent: string;
 }
 
 const App = (props) => {

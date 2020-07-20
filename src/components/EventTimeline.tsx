@@ -26,7 +26,7 @@ function EventTimeline(props: { appState: IAppState, setAppState: Dispatch<SetSt
       newState.days = { ...newState.days, [props.appState.currentDate!]: { events: [], done: false } };
     }
     newState.days[props.appState.currentDate!].events.push(newEvent as any);
-    newState.currentEvent = newEvent.guid;
+    newState.currentEvent = newEvent.guid!;
     props.setAppState(newState);
   };
 

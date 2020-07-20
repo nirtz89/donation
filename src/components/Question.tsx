@@ -1,24 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Dispatch, SetStateAction } from 'react';
 import './Question.scss';
-import { IQuestionType, IQuestion, ITransportationType } from '../App';
-import { Button, TextField } from '@material-ui/core';
+import { IQuestionType, IQuestion, ITransportationType, IAppState } from '../App';
+import { Button } from '@material-ui/core';
 
-function Question(props) {
+export interface IQuestionProps {
+    question: IQuestion;
+    appState: IAppState;
+    setAppState: Dispatch<SetStateAction<IAppState>>;
+    location: any;
+    setLocation: Dispatch<SetStateAction<any>>;
+}
+
+function Question(props: IQuestionProps) {
 
     useEffect(() => {
         props.setLocation('');
-      }, []);
+    }, []);
 
       const onClick = (...params) => {
         const state = { ...props.appState};
         let event = state.days[state.currentDate].events.find(event => event.guid === state.currentEvent);
         event = props.question.updateEvent(event, ...params);
+        if (!event) {
+            console.error('event not found!');
+            return;
+        }
         event.currentQuestion++;
         const index = state.days[state.currentDate].events.indexOf(event => event.guid === state.currentEvent);
         state.days[state.currentDate].events.splice(index, 1);
         state.days[state.currentDate].events.push(event);
         props.setAppState(state);
-      }
+    }
 
     const makeQuestion = (question: IQuestion) => {
         let toReturn: any;
