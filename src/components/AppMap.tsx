@@ -23,9 +23,9 @@ export class SimpleExample extends Component<any, State> {
     this.location = props.location;
   }
   state = {
-    lat: 32.08811000000003,
+    lat: 31.48811000000003,
     lng: 34.782260000000065,
-    zoom: 10,
+    zoom: 6,
   }
 
   componentDidMount() {
