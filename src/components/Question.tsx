@@ -26,7 +26,7 @@ function Question(props: IQuestionProps) {
             return;
         }
         event.currentQuestion++;
-        const index = state.days[state.currentDate].events.indexOf(event => event.guid === state.currentEvent);
+        const index = state.days[state.currentDate].events.indexOf(event);
         state.days[state.currentDate].events.splice(index, 1);
         state.days[state.currentDate].events.push(event);
         props.setAppState(state);
