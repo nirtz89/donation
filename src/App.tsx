@@ -93,10 +93,11 @@ function App() {
 }
 
   const [state, setState] = useState(initState);
+  const [location, setLocation] = useState(null);
 
   return (
     <div className="App">
-      <Container appState={state} setAppState={setState} />
+      <Container appState={state} setAppState={setState} location={location} setLocation={setLocation} />
     </div>
   );
 }

@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Question.scss';
 import { IQuestionType, IQuestion, ITransportationType } from '../App';
 import { Button, TextField } from '@material-ui/core';
 
 function Question(props) {
+
+    useEffect(() => {
+        props.setLocation('');
+      }, []);
+    
 
     const makeQuestion = (question: IQuestion) => {
         let toReturn: any;
@@ -17,10 +22,10 @@ function Question(props) {
             break;
             case IQuestionType.Location:
                 toReturn = (<>
-                    <TextField id="standard-basic" label="Location" />
+                    <div id="location-div" style={{ position: 'relative', maxWidth: '300px'}} />
                     <br/>
                     <br/>
-                    <Button variant="contained" color="primary" style={{marginTop:'1em'}}>
+                    <Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2}}>
                         Next
                     </Button>
                     </>)

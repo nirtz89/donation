@@ -23,7 +23,7 @@ const Main = (props) => {
         <EventTimeline />
         <div className="QuestionWrapper">
             {props.questions[currentQuestion] ?
-            <Question question={props.questions[currentQuestion]} />
+            <Question question={props.questions[currentQuestion]} location={props.location} setLocation={props.setLocation} />
             :
             'no questions :('
             }
