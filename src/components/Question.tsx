@@ -1,6 +1,7 @@
 import React from 'react';
 import './Question.scss';
 import { IQuestionType, IQuestion, ITransportationType } from '../App';
+import { Button } from '@material-ui/core';
 
 function Question(props) {
 
@@ -9,29 +10,50 @@ function Question(props) {
         switch (question.type) {
             case IQuestionType.Bool:
                 toReturn = (<>
-                <button className="Button secondary">NO</button>
-                <button className="Button primary">YES</button>
+                <Button variant="contained" color="primary">Yes</Button>
+                &nbsp;&nbsp;&nbsp;
+                <Button variant="contained" color="secondary">No</Button>
                 </>)
             break;
             case IQuestionType.Location:
                 toReturn = (<>
                     <input placeholder="LOCATION"/>
+                    <br/>
+                    <br/>
+                    <Button variant="contained" color="primary">
+                        Next
+                    </Button>
                     </>)
             break;
             case IQuestionType.Number:
                 toReturn = (<>
                     <input type="number" placeholder="NUMBER"/>
+                    <br/>
+                    <br/>
+                    <Button variant="contained" color="primary">
+                        Next
+                    </Button>
                     </>)
             break;
             case IQuestionType.Hours:
                 toReturn = (<>
                     <input type="number" placeholder="FROM"/>
                     <input type="number" placeholder="TO"/>
+                    <br/>
+                    <br/>
+                    <Button variant="contained" color="primary">
+                        Next
+                    </Button>
                     </>)
             break;
             case IQuestionType.People:
                 toReturn = (<>
                     <input placeholder="PEOPLE"/>
+                    <br/>
+                    <br/>
+                    <Button variant="contained" color="primary">
+                        Next
+                    </Button>
                     </>)
             break;
             case IQuestionType.Transportation:

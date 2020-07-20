@@ -1,8 +1,9 @@
 import React from 'react';
 import {useState} from 'react';
 import './Main.scss';
-import Progressbar from './Progressbar';
 import Question from './Question';
+import { Button } from '@material-ui/core';
+import EventTimeline from './EventTimeline';
 
 const Main = (props) => {
 
@@ -20,7 +21,7 @@ const Main = (props) => {
 
   return (
     <div className="Main">
-        <Progressbar questions={props.questions}/>
+        <EventTimeline />
         <div className="QuestionWrapper">
             {props.questions[currentQuestion] ?
             <Question question={props.questions[currentQuestion]} />
@@ -28,7 +29,6 @@ const Main = (props) => {
             'no questions :('
             }
         </div>
-        {props.questions[currentQuestion] && <button onClick={nextClicked}>NEXT</button>}
     </div>
   );
 };

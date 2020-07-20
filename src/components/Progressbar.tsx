@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Progressbar.scss';
 
-function Progressbar({questions}) {
 
+function Progressbar(props) {
     const [width, setWidth] = useState(0);
 
     useEffect(()=> {
