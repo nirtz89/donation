@@ -3,7 +3,7 @@ import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
 export interface IPickFirstDateProps {
-    setDate: any;
+    setDate: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const PickFirstDate = (props: IPickFirstDateProps) => {

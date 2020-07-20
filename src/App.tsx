@@ -78,22 +78,22 @@ const App = (props) => {
     const startDate = moment(endDate).add(-13, 'days').toDate();
 
     const eventMock: IEvent = {
-      guid: uuidv4(),
-      type: IEventType.Home,
-      maskOn: true,
-      numberOfPeople: 2,
-      people: [],
-      location: { lat: 1, lon: 1},
-      transportation: ITransportationType.Walk,
-      startTime: '8:00',
-      endTime: '10:00',
-      currentQuestion: 0
+        guid: uuidv4(),
+        type: IEventType.Home,
+        maskOn: true,
+        numberOfPeople: 2,
+        people: [],
+        location: { lat: 1, lon: 1},
+        transportation: ITransportationType.Walk,
+        startTime: '8:00',
+        endTime: '10:00',
+        currentQuestion: 0
   }
   const initState: IAppState = {
     currentDate: startDate.toLocaleDateString(),
     currentEvent: eventMock.guid,
     days: {
-        [new Date().toLocaleDateString()]: {events: [eventMock], done: true }
+        [startDate.toLocaleDateString()]: {events: [eventMock], done: true }
     },
     questions: [
       /*{
