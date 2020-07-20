@@ -12,7 +12,7 @@ function Sidebar(props) {
           <AppCalendar start={props.startDate} end={props.endDate} days={props.appState.days} />
         </div>
         <div className="Sidebar-bottom">
-          <AppMap />
+          <AppMap location={props.location} setLocation={props.setLocation} />
         </div>
     </div>
   );
