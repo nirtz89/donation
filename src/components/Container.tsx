@@ -5,7 +5,6 @@ import Sidebar from './Sidebar';
 import moment from 'moment';
 
 function Container(props) {
-    console.debug('cont date: ' + props.date);
     const endDate = props.date ? props.date : new Date();
     const startDate = moment(endDate).add(-13, 'days');
 

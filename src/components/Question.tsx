@@ -8,7 +8,6 @@ function Question(props) {
     useEffect(() => {
         props.setLocation('');
       }, []);
-    
 
     const makeQuestion = (question: IQuestion) => {
         let toReturn: any;

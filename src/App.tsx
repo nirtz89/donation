@@ -62,6 +62,7 @@ export enum ITransportationType {
 interface IInitState {
   days: Record<string, IDay[]>;
   questions: IQuestion[];
+  currentDate?: Date;
 }
 
 const App = (props) => {
@@ -85,14 +86,14 @@ const App = (props) => {
       question: 'Where have you been?'
     },
     {
-      guid: uuidv4(),
-      type: IQuestionType.Bool,
-      question: 'Did you wear a mask?'
+    guid: uuidv4(),
+    type: IQuestionType.Hours,
+    question: 'At what hours?'
     },
     {
       guid: uuidv4(),
-      type: IQuestionType.Hours,
-      question: 'At what hours?'
+      type: IQuestionType.Bool,
+      question: 'Did you wear a mask?'
     },
     {
       guid: uuidv4(),
@@ -117,7 +118,6 @@ const App = (props) => {
 
   const [state, setState] = useState(initState);
   const [location, setLocation] = useState(null);
-  console.debug('props %o', props.history.location.state);
 
   return (
     <div className="App">
