@@ -10,7 +10,7 @@ const Main = (props) => {
 
   return (
     <div className="Main">
-        <EventTimeline />
+        <EventTimeline appState={props.appState} setAppState={props.setAppState} />
         <div className="QuestionWrapper">
             {props.questions[currentQuestion] ?
             <Question question={props.questions[currentQuestion]} location={props.location} setLocation={props.setLocation} />
