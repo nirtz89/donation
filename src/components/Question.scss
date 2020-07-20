@@ -13,3 +13,15 @@
 .geocoder-control-suggestions {
     z-index: 50;
 }
+
+.geocoder-control-input {
+    border: 0 !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid gray !important;
+    padding: 1em 0 !important;
+    border-radius: 0 !important;
+}
+
+.geocoder-control {
+    margin-bottom: 1em !important;
+}
