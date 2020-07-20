@@ -18,7 +18,8 @@ function EventTimeline(props: { appState: IAppState, setAppState: Dispatch<SetSt
 
   const addEvent =() => {
     const newEvent: Partial<IEvent> = {
-      guid: uuidv4()
+      guid: uuidv4(),
+      currentQuestion: 0
     };
     const newState =  { ...props.appState };
     if (!newState.days[props.appState.currentDate!]) {

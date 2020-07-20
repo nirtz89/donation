@@ -13,15 +13,14 @@ export interface IMainProps {
 }
 
 const Main = (props: IMainProps) => {
-
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-
+  let event = props.appState.days[props.appState.currentDate] && props.appState.days[props.appState.currentDate].events.find(event => event!.guid === props.appState.currentEvent);
+debugger;
   return (
     <div className="Main">
         <EventTimeline appState={props.appState} setAppState={props.setAppState} />
         <div className="QuestionWrapper">
-            {props.appState.questions[currentQuestion] ?
-            <Question question={props.appState.questions[currentQuestion]} location={props.location} setLocation={props.setLocation} {...props} />
+            {event && props.appState.questions[event.currentQuestion] ?
+            <Question question={props.appState.questions[event.currentQuestion]} location={props.location} setLocation={props.setLocation}  {...props} />
             :
             'no questions :('
             }

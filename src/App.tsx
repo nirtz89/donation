@@ -36,6 +36,7 @@ export interface IEvent {
   numberOfPeople: number,
   transportation: ITransportationType;
   maskOn: boolean;
+  currentQuestion: number;
 }
 
 export interface IQuestion {
@@ -43,7 +44,8 @@ export interface IQuestion {
   type: IQuestionType,
   question: string,
   condition?: string,
-  followUp?: IQuestion[]
+  followUp?: IQuestion[],
+  updateEvent: Function
 }
 
 export enum IQuestionType {
@@ -52,7 +54,8 @@ export enum IQuestionType {
   Location,
   Number,
   People,
-  Transportation
+  Transportation,
+  EventType
 }
 
 export enum ITransportationType {
@@ -83,7 +86,8 @@ const App = (props) => {
       location: { lat: 1, lon: 1},
       transportation: ITransportationType.Walk,
       startTime: '8:00',
-      endTime: '10:00'
+      endTime: '10:00',
+      currentQuestion: 0
   }
   const initState: IAppState = {
     currentDate: startDate.toLocaleDateString(),
@@ -92,38 +96,50 @@ const App = (props) => {
         [new Date().toLocaleDateString()]: {events: [eventMock], done: true }
     },
     questions: [
+      /*{
+        guid: uuidv4(),
+        type: IQuestionType.EventType,
+        question: 'Select event type',
+        updateEvent: (event: IEvent, type: IEventType) => ({ ...event, type })
+      },*/
     {
       guid: uuidv4(),
       type: IQuestionType.Location,
-      question: 'Where have you been?'
+      question: 'Where have you been?',
+      updateEvent: (event) => event
     },
     {
     guid: uuidv4(),
     type: IQuestionType.Hours,
-    question: 'At what hours?'
+    question: 'At what hours?',
+    updateEvent: (event: IEvent, from: string, to: string) => ({ ...event, startTime: from, endTime: to })
     },
     {
       guid: uuidv4(),
       type: IQuestionType.Bool,
-      question: 'Did you wear a mask?'
+      question: 'Did you wear a mask?',
+      updateEvent: (event: IEvent, maskOn: boolean): IEvent => ({ ...event, maskOn })
     },
     {
       guid: uuidv4(),
       type: IQuestionType.Number,
       question: 'How many people were there with you?',
       condition: '> 0',
+      updateEvent: (event: IEvent, numberOfPeople: number): IEvent => ({ ...event, numberOfPeople }),
       followUp: [
         {
           guid: uuidv4(),
           type: IQuestionType.People,
           question: 'Please fill in the people that you know were there',
+          updateEvent: (event: IEvent, people: string): IEvent => ({ ...event }),
         }
       ]
     },
     {
       guid: uuidv4(),
       type: IQuestionType.Transportation,
-      question: 'How did you get there?'
+      question: 'How did you get there?',
+      updateEvent: (event: IEvent, transportation: ITransportationType): IEvent => ({ ...event, transportation }),
     }
   ]
 }

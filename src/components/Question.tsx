@@ -9,14 +9,25 @@ function Question(props) {
         props.setLocation('');
       }, []);
 
+      const onClick = (...params) => {
+        const state = { ...props.appState};
+        let event = state.days[state.currentDate].events.find(event => event.guid === state.currentEvent);
+        event = props.question.updateEvent(event, ...params);
+        event.currentQuestion++;
+        const index = state.days[state.currentDate].events.indexOf(event => event.guid === state.currentEvent);
+        state.days[state.currentDate].events.splice(index, 1);
+        state.days[state.currentDate].events.push(event);
+        props.setAppState(state);
+      }
+
     const makeQuestion = (question: IQuestion) => {
         let toReturn: any;
         switch (question.type) {
             case IQuestionType.Bool:
                 toReturn = (<>
-                <Button variant="contained" color="primary">Yes</Button>
+                <Button variant="contained" color="primary" onClick={() => onClick(true)}>Yes</Button>
                 &nbsp;&nbsp;&nbsp;
-                <Button variant="contained" color="secondary">No</Button>
+                <Button variant="contained" color="secondary" onClick={() => onClick(false)}>No</Button>
                 </>)
             break;
             case IQuestionType.Location:
@@ -24,38 +35,38 @@ function Question(props) {
                     <div id="location-div" style={{ position: 'relative', maxWidth: '300px', top: '16px'}} />
                     <br/>
                     <br/>
-                    <Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2}}>
+                    <Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2}} onClick={onClick}>
                         Next
                     </Button>
                     </>)
             break;
             case IQuestionType.Number:
                 toReturn = (<>
-                    <input type="number" placeholder="NUMBER"/>
+                    <input id="number-input" type="number" placeholder="NUMBER"/>
                     <br/>
                     <br/>
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary" onClick={() => onClick((document.getElementById('number-input') as any).value)}>
                         Next
                     </Button>
                     </>)
             break;
             case IQuestionType.Hours:
                 toReturn = (<>
-                    <input type="number" placeholder="FROM"/>
-                    <input type="number" placeholder="TO"/>
+                    <input id='from-input' type="number" placeholder="FROM" />
+                    <input id='to-input' type="number" placeholder="TO" />
                     <br/>
                     <br/>
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary" onClick={() => onClick((document.getElementById('from-input') as any).value, (document.getElementById('to-input') as any).value)}>
                         Next
                     </Button>
                     </>)
             break;
             case IQuestionType.People:
                 toReturn = (<>
-                    <input placeholder="PEOPLE"/>
+                    <input id='person-name-input' placeholder="PEOPLE"/>
                     <br/>
                     <br/>
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary" onClick={() => onClick((document.getElementById('person-name-input') as any).value)}>
                         Next
                     </Button>
                     </>)

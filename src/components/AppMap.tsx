@@ -15,6 +15,7 @@ export class SimpleExample extends Component<any, State> {
   mapRef: React.RefObject<any>;
   setLocation: Function;
   location: Function;
+  searchContainer: any;
 
   constructor(props) {
     super(props);
@@ -32,12 +33,8 @@ export class SimpleExample extends Component<any, State> {
     const map = this.mapRef.current.leafletElement;
     const searchControl = new ELG.Geosearch().addTo(map);
     const results = new L.LayerGroup().addTo(map);
-    var htmlObject = searchControl.getContainer();
-    var locationDiv = document.getElementById('location-div');
-    if (locationDiv) {
-      htmlObject.className += 'geocoder-control-expanded';
-      locationDiv.appendChild(htmlObject);
-    }
+    this.searchContainer = searchControl.getContainer();
+    
 
     searchControl.on('results', (data) => {
         this.setLocation(data);
@@ -57,7 +54,12 @@ export class SimpleExample extends Component<any, State> {
 
   render() {
     const position = [this.state.lat, this.state.lng]
-
+    var locationDiv = document.getElementById('location-div');
+    if (locationDiv) {
+      this.searchContainer.className += 'geocoder-control-expanded';
+      locationDiv.appendChild(this.searchContainer);
+    }
+    
     return (
       <Map ref={this.mapRef} center={position} zoom={this.state.zoom} style={{ width: '100%', height: '100%'}} >
         <TileLayer
