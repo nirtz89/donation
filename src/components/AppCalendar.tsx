@@ -13,17 +13,12 @@ const AppCalendar = (props: ICalendarProps) => {
     const [clickedDate, setClickedDate] = useState(props.start);
 
     const handleChange = (date: any) => {
-        if (moment(date).isBetween(moment(props.start), moment(props.end))) {
-            setClickedDate(date); // set redux state here
-        } else {
-            console.debug('out');
-        }
+        setClickedDate(date); // set redux state here
     };
 
     const isSameDayInMonth = (date1: Date, date2: Date) => {
         return moment(date1).format('YYYY-MM-DD') === moment(date2).format('YYYY-MM-DD');
     }
-
 
     return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -35,6 +30,8 @@ const AppCalendar = (props: ICalendarProps) => {
               value={clickedDate}
               onChange={handleChange}
               disableToolbar
+              maxDate={props.end}
+              minDate={props.start}
               renderDay={(day, selectedDate, isInCurrentMonth, dayComponent) => {
                 const isStart = isInCurrentMonth && day && isSameDayInMonth(day, props.start);
                 const isEnd = isInCurrentMonth && day && isSameDayInMonth(day, props.end);

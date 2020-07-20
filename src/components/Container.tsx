@@ -9,7 +9,7 @@ function addDays(date: Date, days: number) {
 }
 
 function Container(props) {
-    const startDate = addDays(new Date(), 0);
+    const startDate = addDays(new Date(), +9);
     const endDate = addDays(startDate, 5);
 
   return (
