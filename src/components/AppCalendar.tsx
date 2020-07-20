@@ -34,11 +34,11 @@ const AppCalendar = (props: ICalendarProps) => {
               openTo="date"
               value={clickedDate}
               onChange={handleChange}
+              disableToolbar
               renderDay={(day, selectedDate, isInCurrentMonth, dayComponent) => {
                 const isStart = isInCurrentMonth && day && isSameDayInMonth(day, props.start);
                 const isEnd = isInCurrentMonth && day && isSameDayInMonth(day, props.end);
                 return <Badge badgeContent={isStart ? "🌚" : isEnd ?  "🌚" : undefined}>{dayComponent}</Badge>;
-
               }}
         />
     </MuiPickersUtilsProvider>
