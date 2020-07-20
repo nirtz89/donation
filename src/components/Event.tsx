@@ -1,6 +1,6 @@
 import React from 'react';
 import './Event.scss';
-import { Tooltip, Typography, withStyles } from '@material-ui/core';
+import { Tooltip, Typography, withStyles, Button } from '@material-ui/core';
 
 function Event(props) {
 
@@ -18,7 +18,9 @@ function Event(props) {
         <Typography color="inherit">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolorem.</Typography>
       </React.Fragment>
     }>
-      <div className={`Event ${props.isCurrent ? 'current' : ''}`}>Event</div>
+<Button className={`Event ${props.isCurrent ? 'current' : ''}`} onClick={props.onClick}>
+  { props.event.type ?
+  (<>{ props.event.type }<br/> {`${props.event.startTime}-${props.event.endTime}`}</>) : 'New Event'}</Button>
     </HtmlTooltip>
   );
 }

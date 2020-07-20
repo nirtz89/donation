@@ -21,7 +21,7 @@ function Container(props: IContainerProps) {
     <>
     <div className="Container">
       <Sidebar startDate={startDate} endDate={endDate} {...props} />
-      <Main questions={props.appState.questions} location={props.location} setLocation={props.setLocation}  />
+      <Main {...props}   />
     </div>
     <small style={{color: 'gray', marginTop: '32px', display: 'block', opacity: 0.5}}>Made with pride by the eSeal team for the Microsoft Hackathon 2020</small>
     </>

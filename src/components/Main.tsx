@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import {useState} from 'react';
 import './Main.scss';
 import Question from './Question';
 import EventTimeline from './EventTimeline';
+import { IAppState } from '../App';
 
-const Main = (props) => {
+export interface IMainProps {
+    appState: IAppState;
+    setAppState: Dispatch<SetStateAction<IAppState>>;
+    location: any;
+    setLocation: Dispatch<SetStateAction<any>>;
+}
+
+const Main = (props: IMainProps) => {
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
   return (
     <div className="Main">
-        <EventTimeline />
+        <EventTimeline appState={props.appState} setAppState={props.setAppState} />
         <div className="QuestionWrapper">
-            {props.questions[currentQuestion] ?
-            <Question question={props.questions[currentQuestion]} location={props.location} setLocation={props.setLocation} />
+            {props.appState.questions[currentQuestion] ?
+            <Question question={props.appState.questions[currentQuestion]} location={props.location} setLocation={props.setLocation} />
             :
             'no questions :('
             }

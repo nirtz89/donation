@@ -30,6 +30,8 @@ export interface IEvent {
   type: IEventType;
   location: {lat: number, lon: number};
   people: IPeople[],
+  startTime: string;
+  endTime: string;
   numberOfPeople: number,
   transportation: ITransportationType;
   maskOn: boolean;
@@ -60,9 +62,10 @@ export enum ITransportationType {
 }
 
 export interface IAppState {
-  days: Record<string, IDay[]>;
+  days: Record<string, IDay>; // key date string
   questions: IQuestion[];
-  currentDate?: Date;
+  currentDate?: string;
+  currentEvent?: string;
 }
 
 const App = (props) => {
@@ -73,11 +76,15 @@ const App = (props) => {
       numberOfPeople: 2,
       people: [],
       location: { lat: 1, lon: 1},
-      transportation: ITransportationType.Walk
-    }
+      transportation: ITransportationType.Walk,
+      startTime: '8:00',
+      endTime: '10:00'
+  }
   const initState: IAppState = {
+    currentDate: new Date().toLocaleDateString(),
+    currentEvent: eventMock.guid,
     days: {
-        mock: [{events: [eventMock], done: true } ],
+        [new Date().toLocaleDateString()]: {events: [eventMock], done: true }
     },
     questions: [
     {
@@ -118,7 +125,6 @@ const App = (props) => {
 
   const [state, setState] = useState(initState);
   const [location, setLocation] = useState(null);
-
   return (
     <div className="App">
       <Container appState={state} setAppState={setState} location={location} setLocation={setLocation} testDate={props.history.location.state} />
