@@ -18,7 +18,7 @@ const PickFirstDate = (props: IPickFirstDateProps) => {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <DatePicker
               disableToolbar
-              label="Test date"
+              label="Select date"
               orientation="landscape"
               openTo="date"
               defaultValue={null}
