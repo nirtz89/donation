@@ -8,18 +8,30 @@ export interface IDay {
 }
 
 export interface IPeople {
-  name: string,
-  phone: string,
-  id: string
+  name?: string,
+  phone?: string,
+  id?: string
+}
+
+export enum IEventType {
+    Gym = "gym",
+    Home = "home",
+    Pool = "pool",
+    Sea = "sea",
+    Prayer = "prayer",
+    Clinic = "clinic",
+    Restaurant = "restaurant",
+    Pub = "pub"
 }
 
 export interface IEvent {
   guid: string;
+  type: IEventType;
   location: {lat: number, lon: number};
-  answeres: Record<number, IQuestion>;
-  date: Date;
   people: IPeople[],
+  numberOfPeople: number,
   transportation: ITransportationType;
+  maskOn: boolean;
 }
 
 export interface IQuestion {
@@ -39,6 +51,7 @@ export enum IQuestionType {
   Transportation
 }
 
+// to a Home Event Type we should don't need transportaion
 export enum ITransportationType {
   Taxi = "taxi",
   Bus = "bus",
@@ -47,14 +60,24 @@ export enum ITransportationType {
 }
 
 interface IInitState {
-  days: Record<string,IDay[]>;
+  days: Record<string, IDay[]>;
   questions: IQuestion[];
 }
 
 function App() {
-
+  const eventMock: IEvent = {
+      guid: uuidv4(),
+      type: IEventType.Home,
+      maskOn: true,
+      numberOfPeople: 2,
+      people: [],
+      location: { lat: 1, lon: 1},
+      transportation: ITransportationType.Walk
+  }
   const initState: IInitState = {
-    days: {},
+    days: {
+        mock: [{events: [eventMock]}],
+    },
     questions: [
     {
       guid: uuidv4(),
