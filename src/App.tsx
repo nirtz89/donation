@@ -5,6 +5,7 @@ import './App.css';
 
 export interface IDay {
   events: IEvent[]
+  done: boolean;
 }
 
 export interface IPeople {
@@ -76,7 +77,7 @@ function App() {
   }
   const initState: IInitState = {
     days: {
-        mock: [{events: [eventMock]}],
+        mock: [{events: [eventMock], done: true } ],
     },
     questions: [
     {

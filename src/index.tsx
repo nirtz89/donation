@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import Home from './Home'
+import Home from './home/Home'
 import App from './App'
 const routing = (
   <Router>
