@@ -33,9 +33,10 @@ const AppCalendar = (props: ICalendarProps) => {
               maxDate={props.end}
               minDate={props.start}
               renderDay={(day, selectedDate, isInCurrentMonth, dayComponent) => {
+                // after redux -> set badge to compleated days = with at least 1 event
                 const isStart = isInCurrentMonth && day && isSameDayInMonth(day, props.start);
                 const isEnd = isInCurrentMonth && day && isSameDayInMonth(day, props.end);
-                return <Badge badgeContent={isStart ? "🌚" : isEnd ?  "🌚" : undefined}>{dayComponent}</Badge>;
+                return <Badge badgeContent={isStart ? "✔" : isEnd ?  "✔" : undefined}>{dayComponent}</Badge>;
               }}
         />
     </MuiPickersUtilsProvider>
