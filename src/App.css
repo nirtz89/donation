@@ -46,3 +46,7 @@ body {
     transform: rotate(360deg);
   }
 }
+
+p.MuiTypography-root.MuiTypography-body1.MuiTypography-alignCenter {
+    color: black
+}

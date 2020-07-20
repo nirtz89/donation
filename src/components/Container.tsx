@@ -2,14 +2,12 @@ import React from 'react';
 import Main from './Main';
 import './Container.scss';
 import Sidebar from './Sidebar';
-
-function addDays(date: Date, days: number) {
-    return new Date(date.getTime() + days*24*60*60*1000);
-}
+import moment from 'moment';
 
 function Container(props) {
-    const startDate = addDays(new Date(), +9);
-    const endDate = addDays(startDate, 5);
+    console.debug('cont date: ' + props.date);
+    const endDate = props.date ? props.date : new Date();
+    const startDate = moment(endDate).add(-13, 'days');
 
   return (
     <>

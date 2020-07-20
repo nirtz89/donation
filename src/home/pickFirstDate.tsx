@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
-const PickFirstDate = (props) => {
-    const [clickedDate, setClickedDate] = useState(props.start);
+export interface IPickFirstDateProps {
+    setDate: any;
+}
+
+const PickFirstDate = (props: IPickFirstDateProps) => {
+    const [clickedDate, setClickedDate] = useState(new Date());
 
     const handleChange = (date: any) => {
+        props.setDate(date);
         setClickedDate(date);
     };
-
 
     return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>

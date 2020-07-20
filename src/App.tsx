@@ -52,7 +52,6 @@ export enum IQuestionType {
   Transportation
 }
 
-// to a Home Event Type we should don't need transportaion
 export enum ITransportationType {
   Taxi = "taxi",
   Bus = "bus",
@@ -65,7 +64,7 @@ interface IInitState {
   questions: IQuestion[];
 }
 
-function App() {
+const App = (props) => {
   const eventMock: IEvent = {
       guid: uuidv4(),
       type: IEventType.Home,
@@ -118,10 +117,11 @@ function App() {
 
   const [state, setState] = useState(initState);
   const [location, setLocation] = useState(null);
+  console.debug('props %o', props.history.location.state);
 
   return (
     <div className="App">
-      <Container appState={state} setAppState={setState} location={location} setLocation={setLocation} />
+      <Container appState={state} setAppState={setState} location={location} setLocation={setLocation} date={props.history.location.state} />
     </div>
   );
 }

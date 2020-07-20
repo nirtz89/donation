@@ -6,18 +6,17 @@ import './Home.scss';
 
 const Home = () => {
     const history = useHistory();
-
-    const StartClick = () => {
-        history.push('/inq')
-    }
+    const [date, setDate] = useState(null);
 
     return (
         <div className="Home">
-            <small style={{color: 'gray', marginTop: '32px', display: 'block', opacity: 0.5}}>When did u have your Covid-19 test?</small>
-            <PickFirstDate />
-            <Button variant="contained" color="primary" onClick={StartClick}>
-                            Start Inquiry
-            </Button>
+            <small style={{color: 'gray', marginTop: '32px', display: 'block', opacity: 0.5}}>When was your Covid-19 test?</small>
+            <PickFirstDate setDate={setDate}/>
+            {date ?
+                <Button variant="contained" color="primary" onClick={() => history.push( {pathname: '/inq', state: date} )}>
+                                Start Inquiry
+                </Button>
+                : null }
             <small style={{color: 'gray', marginTop: '32px', display: 'block', opacity: 0.5}}>Made with pride by the eSeal team for the Microsoft Hackathon 2020</small>
         </div>
       );
