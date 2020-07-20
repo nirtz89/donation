@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from './components/Container';
 import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 
 export interface IDay {
-  date: Date,
   events: IEvent[]
 }
 
@@ -16,7 +15,7 @@ export interface IPeople {
 
 export interface IEvent {
   guid: string;
-  location: {lan: number, lon: number};
+  location: {lat: number, lon: number};
   answeres: Record<number, IQuestion>;
   date: Date;
   people: IPeople[],
@@ -47,9 +46,16 @@ export enum ITransportationType {
   Bicycle = "bicycle"
 }
 
+interface IInitState {
+  days: Record<string,IDay[]>;
+  questions: IQuestion[];
+}
+
 function App() {
 
-  const questions: IQuestion[] = [
+  const initState: IInitState = {
+    days: {},
+    questions: [
     {
       guid: uuidv4(),
       type: IQuestionType.Location,
@@ -84,10 +90,13 @@ function App() {
       question: 'How did you get there?'
     }
   ]
+}
+
+  const [state, setState] = useState(initState);
 
   return (
     <div className="App">
-      <Container questions={questions} />
+      <Container appState={state} setAppState={setState} />
     </div>
   );
 }
