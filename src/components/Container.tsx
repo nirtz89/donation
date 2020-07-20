@@ -14,7 +14,7 @@ function Container(props) {
   return (
     <>
     <div className="Container">
-      <Sidebar calendarProps={{startDate, endDate}} appState={props.appState} />
+      <Sidebar startDate={startDate} endDate={endDate} appState={props.appState} />
       <Main questions={props.appState.questions} />
     </div>
     <small style={{color: 'gray', marginTop: '32px', display: 'block', opacity: 0.5}}>Made with pride by the eSeal team for the Microsoft Hackathon 2020</small>
