@@ -11,7 +11,7 @@ function Progressbar(props: IProgressbarProps) {
     useEffect(()=> {
         let count = 0;
         Object.values(props.days).forEach(day => {
-                day.events.length > 0 && count++;
+                day.done && count++;
             });
         const progressAddition = count / 14;
         setProgress(progressAddition * 100);
