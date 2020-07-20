@@ -6,7 +6,7 @@ function EventTimeline(props) {
 
   return (
     <div className="EventTimeline">
-        {[1,2,3,4].map((v)=><Event isCurrent={v===4} />)}
+        {[1,2,3,4].map((v)=><Event key={v} isCurrent={v===4} />)}
     </div>
   );
 }
