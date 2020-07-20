@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Container from './components/Container';
 import { v4 as uuidv4 } from 'uuid';
 import './App.css';
+import moment from 'moment';
 
 export interface IDay {
   events: IEvent[]
@@ -64,11 +65,15 @@ export enum ITransportationType {
 export interface IAppState {
   days: Record<string, IDay>; // key date string
   questions: IQuestion[];
-  currentDate?: string;
+  currentDate: string;
   currentEvent?: string;
 }
 
 const App = (props) => {
+    const testDate = props.history.location.state;
+    const endDate = testDate ? testDate : new Date();
+    const startDate = moment(endDate).add(-13, 'days').toDate();
+
     const eventMock: IEvent = {
       guid: uuidv4(),
       type: IEventType.Home,
@@ -81,7 +86,7 @@ const App = (props) => {
       endTime: '10:00'
   }
   const initState: IAppState = {
-    currentDate: new Date().toLocaleDateString(),
+    currentDate: startDate.toLocaleDateString(),
     currentEvent: eventMock.guid,
     days: {
         [new Date().toLocaleDateString()]: {events: [eventMock], done: true }
@@ -127,7 +132,7 @@ const App = (props) => {
   const [location, setLocation] = useState(null);
   return (
     <div className="App">
-      <Container appState={state} setAppState={setState} location={location} setLocation={setLocation} testDate={props.history.location.state} />
+      <Container appState={state} setAppState={setState} location={location} setLocation={setLocation} startDate={startDate} endDate={endDate} />
     </div>
   );
 }

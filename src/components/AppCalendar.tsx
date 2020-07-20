@@ -13,10 +13,10 @@ export interface ICalendarProps {
 }
 
 const AppCalendar = (props: ICalendarProps) => {
-    const [clickedDate, setClickedDate] = useState(props.startDate);
+    const [clickedDate, setClickedDate] = useState(Date.parse(props.appState.currentDate));
 
     const handleChange = (date: any) => {
-        setClickedDate(date); // set current date here - points to the dic
+        setClickedDate(date);
         const newState = { ...props.appState, currentDate: date };
         props.setAppState(newState);
     };
