@@ -22,7 +22,7 @@ function Question(props) {
             break;
             case IQuestionType.Location:
                 toReturn = (<>
-                    <div id="location-div" style={{ position: 'relative', maxWidth: '300px'}} />
+                    <div id="location-div" style={{ position: 'relative', maxWidth: '300px', top: '16px'}} />
                     <br/>
                     <br/>
                     <Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2}}>
