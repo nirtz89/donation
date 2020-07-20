@@ -59,14 +59,14 @@ export enum ITransportationType {
   Bicycle = "bicycle"
 }
 
-interface IInitState {
+export interface IAppState {
   days: Record<string, IDay[]>;
   questions: IQuestion[];
   currentDate?: Date;
 }
 
 const App = (props) => {
-  const eventMock: IEvent = {
+    const eventMock: IEvent = {
       guid: uuidv4(),
       type: IEventType.Home,
       maskOn: true,
@@ -74,8 +74,8 @@ const App = (props) => {
       people: [],
       location: { lat: 1, lon: 1},
       transportation: ITransportationType.Walk
-  }
-  const initState: IInitState = {
+    }
+  const initState: IAppState = {
     days: {
         mock: [{events: [eventMock], done: true } ],
     },
@@ -121,7 +121,7 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <Container appState={state} setAppState={setState} location={location} setLocation={setLocation} date={props.history.location.state} />
+      <Container appState={state} setAppState={setState} location={location} setLocation={setLocation} testDate={props.history.location.state} />
     </div>
   );
 }

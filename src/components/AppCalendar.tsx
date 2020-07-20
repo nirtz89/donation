@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { Badge } from '@material-ui/core';
 import moment from 'moment';
-import { IDay } from '../App';
+import { IDay, IAppState } from '../App';
 
 export interface ICalendarProps {
-    start: Date;
-    end: Date;
-    days: Record<string, IDay[]>;
+    startDate: Date;
+    endDate: Date;
+    appState: IAppState;
+    setAppState: Dispatch<SetStateAction<IAppState>>;
 }
 
 const AppCalendar = (props: ICalendarProps) => {
-    const [clickedDate, setClickedDate] = useState(props.start);
+    const [clickedDate, setClickedDate] = useState(props.startDate);
 
     const handleChange = (date: any) => {
         setClickedDate(date); // set current date here - points to the dic
@@ -31,12 +32,12 @@ const AppCalendar = (props: ICalendarProps) => {
               value={clickedDate}
               onChange={handleChange}
               disableToolbar
-              maxDate={props.end}
-              minDate={props.start}
+              maxDate={props.endDate}
+              minDate={props.startDate}
               renderDay={(day, selectedDate, isInCurrentMonth, dayComponent) => {
                 // after redux -> set badge to compleated days = with at least 1 event
-                const isStart = isInCurrentMonth && day && isSameDayInMonth(day, props.start);
-                const isEnd = isInCurrentMonth && day && isSameDayInMonth(day, props.end);
+                const isStart = isInCurrentMonth && day && isSameDayInMonth(day, props.startDate);
+                const isEnd = isInCurrentMonth && day && isSameDayInMonth(day, props.endDate);
                 return <Badge style={{color: 'green'}} badgeContent={isStart ? "✔" : isEnd ?  "✔" : undefined}>{dayComponent}</Badge>;
               }}
         />

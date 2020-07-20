@@ -57,7 +57,7 @@ export class SimpleExample extends Component<any, State> {
 
   render() {
     const position = [this.state.lat, this.state.lng]
-    
+
     return (
       <Map ref={this.mapRef} center={position} zoom={this.state.zoom} style={{ width: '100%', height: '100%'}} >
         <TileLayer
