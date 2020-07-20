@@ -1,10 +1,53 @@
+// .Home {
+//     flex-basis: 370px;
+//     height: 100%;
+//     background: #fff;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     color: #fff;
+//     padding: 0;
+// }
+
+.Home-container {
+    text-align: center;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .Home {
-    flex-basis: 370px;
-    height: 100%;
-    background: #fff;
+    width: 60vw;
+    height: 60vh;
+    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.1);
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
+    // justify-content: center;
     align-items: center;
-    color: #fff;
-    padding: 0;
+    padding-top: 10em;
+    position: relative;
+    overflow: hidden;
+    background: url('http://www.ansonika.com/magnifica/img/pattern_1.png');
+    * {
+        z-index: 2;
+    }
+    h1 {
+        padding: 0 4em;
+        font-size: 50px;
+        margin-bottom: 1em;
+        color: #3F51B5;
+    }
+    Button {
+        margin-top: 2em;
+    }
+    .welcome-img {
+        position: absolute;
+        border-radius: 50%;
+        transform: translate(65%,20%);
+        z-index: 1;
+    }
 }
