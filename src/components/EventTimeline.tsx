@@ -1,10 +1,13 @@
 import React from 'react';
-import './Container.scss';
+import Event from './Event'
+import './EventTimeline.scss';
 
 function EventTimeline(props) {
 
   return (
-    <div>EventTimeline</div>
+    <div className="EventTimeline">
+        {[1,2,3,4].map((v)=><Event isCurrent={v===4} />)}
+    </div>
   );
 }
 

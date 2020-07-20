@@ -1,0 +1,12 @@
+.Event {
+    padding: 1em;
+    background: rgba(245, 245, 245, 0.5);
+    border-radius: 1em;
+    width: 80px;
+    text-align: center;
+    margin-right: 1em;
+    &.current {
+        background: #3f51b5;
+        color: #fff;
+    }
+}

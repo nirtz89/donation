@@ -6,35 +6,6 @@
         font-size: 26px;
         line-height: 1.4;
         text-align: left;
-    }
-}
-
-.Button {
-    border: none;
-    color: #fff;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-    outline: none;
-    text-align: center;
-    position: relative;
-    font-size: 14px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -ms-border-radius: 3px;
-    border-radius: 3px;
-    line-height: 1;
-    padding: 12px 30px;
-    margin: 0 .5em;
-    &.primary {
-        background: #00A4DE;
-        border: 1px solid #00A4DE;
-    }
-    &.secondary {
-        background: transparent;
-        border: 1px solid gray;
-        color: gray;
+        margin-bottom: .5em;
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Question.scss';
 import { IQuestionType, IQuestion, ITransportationType } from '../App';
-import { Button } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 
 function Question(props) {
 
@@ -17,10 +17,10 @@ function Question(props) {
             break;
             case IQuestionType.Location:
                 toReturn = (<>
-                    <input placeholder="LOCATION"/>
+                    <TextField id="standard-basic" label="Location" />
                     <br/>
                     <br/>
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary" style={{marginTop:'1em'}}>
                         Next
                     </Button>
                     </>)
