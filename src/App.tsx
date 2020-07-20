@@ -125,7 +125,6 @@ const App = (props) => {
 
   const [state, setState] = useState(initState);
   const [location, setLocation] = useState(null);
-debugger;
   return (
     <div className="App">
       <Container appState={state} setAppState={setState} location={location} setLocation={setLocation} date={props.history.location.state} />

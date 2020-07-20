@@ -7,7 +7,7 @@ export interface IPickFirstDateProps {
 }
 
 const PickFirstDate = (props: IPickFirstDateProps) => {
-    const [clickedDate, setClickedDate] = useState(new Date());
+    const [clickedDate, setClickedDate] = useState<any>(null);
 
     const handleChange = (date: any) => {
         props.setDate(date);
@@ -17,9 +17,13 @@ const PickFirstDate = (props: IPickFirstDateProps) => {
     return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <DatePicker
+              disableToolbar
+              label="Test date"
               orientation="landscape"
               openTo="date"
+              defaultValue={null}
               value={clickedDate}
+              onClick={() => setClickedDate(new Date())}
               onChange={handleChange}
         />
     </MuiPickersUtilsProvider>
