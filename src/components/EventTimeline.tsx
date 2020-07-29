@@ -31,7 +31,7 @@ function EventTimeline(props: { appState: IAppState, setAppState: Dispatch<SetSt
   };
 
   if (props.appState.days && (!props.appState.days[props.appState.currentDate!] || !props.appState.days[props.appState.currentDate!].events.length)) {
-    addEvent();
+    // addEvent();
   }
 
   console.log(props.appState.days);

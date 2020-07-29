@@ -3,6 +3,7 @@ import './Main.scss';
 import Question from './Question';
 import EventTimeline from './EventTimeline';
 import { IAppState, IEvent } from '../App';
+import EventSummary from './Events/EventSummary';
 
 export interface IMainProps {
     appState: IAppState;
@@ -12,6 +13,8 @@ export interface IMainProps {
 }
 
 const Main = (props: IMainProps) => {
+
+  console.log(props.appState.days);
 
   const isCurrentEventFull = () => {
     let currEvent: any = null;
@@ -30,7 +33,7 @@ const Main = (props: IMainProps) => {
             {event && props.appState.questions[event.currentQuestion] ?
             <Question question={props.appState.questions[event.currentQuestion]} {...props} />
             :
-            isCurrentEventFull() ? "EVENT DONE! 😄" : "NOT DONE 😫"
+            isCurrentEventFull() ? <EventSummary {...props} event={event} /> : "Add a new event to start."
             }
         </div>
     </div>
