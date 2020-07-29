@@ -15,7 +15,7 @@ export interface IMainProps {
 
 const Main = (props: IMainProps) => {
 
-  console.log(props.appState.days);
+  console.log('days %o', props.appState.days);
 
   const isCurrentEventFull = () => {
     let currEvent: any = null;
@@ -28,13 +28,16 @@ const Main = (props: IMainProps) => {
 
 
   const isInqFinish = () => {
-    // for (let day in props.appState.days) {
-    //     if (!props.appState.days[day].done) {
-    //         return false;
-    //     }
-    // }
-    // return true;
-    return false;
+    const days = Object.keys(props.appState.days);
+    if (days.length < 14) {
+        return false;
+    }
+    for (let day in props.appState.days) {
+        if (!props.appState.days[day].done) {
+            return false;
+        }
+    }
+    return true;
   }
 
   let event = props.appState.days[props.appState.currentDate] && props.appState.days[props.appState.currentDate].events.find(event => event!.guid === props.appState.currentEvent);

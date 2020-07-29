@@ -28,7 +28,6 @@ function Question(props: IQuestionProps) {
             console.error('event not found!');
             return;
         }
-        console.log(event.guid);
         event.currentQuestion++;
         const index = state.days[state.currentDate].events.indexOf(event);
         state.days[state.currentDate].events.splice(index, 1);

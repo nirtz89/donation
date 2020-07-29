@@ -22,7 +22,7 @@ const AppCalendar = (props: ICalendarProps) => {
     };
 
     useEffect(() => {
-        console.log("rerendered...")
+        console.log("calendar rerendered...")
     },[props.appState.days])
 
     const isDoneDay = (date: Date) => {
