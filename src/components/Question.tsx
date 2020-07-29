@@ -16,8 +16,6 @@ function Question(props: IQuestionProps) {
     const [eventTypeState,setEventTypeState] = useState('Gym');
     const [transState,setTransState] = useState('Taxi');
 
-    // console.log(props.appState.days);
-
     useEffect(() => {
         props.setLocation('');
     }, [props]);
