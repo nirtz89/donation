@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import './Main.scss';
 import Question from './Question';
 import EventTimeline from './EventTimeline';
-import { IAppState, IEvent } from '../App';
+import { IAppState } from '../App';
 import EventSummary from './Events/EventSummary';
 
 export interface IMainProps {

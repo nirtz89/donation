@@ -85,7 +85,7 @@ const App = (props) => {
     currentDate: startDate.toLocaleDateString(),
     currentEvent: initEvent.guid,
     days: {
-        [startDate.toLocaleDateString()]: {events: [initEvent], done: true }
+        [startDate.toLocaleDateString()]: {events: [initEvent], done: false }
     },
     questions: [
     {

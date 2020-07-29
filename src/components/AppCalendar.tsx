@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
+import React, { useState, Dispatch, SetStateAction, useEffect } from 'react';
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { Badge } from '@material-ui/core';
@@ -20,6 +20,10 @@ const AppCalendar = (props: ICalendarProps) => {
         const newState = { ...props.appState, currentDate: date.toLocaleDateString() };
         props.setAppState(newState);
     };
+
+    useEffect(() => {
+        console.log("rerendered...")
+    },[props.appState.days])
 
     const isDoneDay = (date: Date) => {
         const day = props.appState.days[date.toLocaleDateString()];
