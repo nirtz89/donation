@@ -34,13 +34,17 @@ function EventTimeline(props: { appState: IAppState, setAppState: Dispatch<SetSt
     addEvent();
   }
 
+  console.log(props.appState.days);
+  console.log(props.appState.days[props.appState.currentDate!]);
+  // console.log(props.appState.days[props.appState.currentDate!].events);
+
   return (
     <div className="EventTimeline" ref={eventTimeLineRef}>
         {props.appState.days && props.appState.days[props.appState.currentDate!] && props.appState.days[props.appState.currentDate!].events.map((event, index)=>
-        <Event key={index} isCurrent={event.guid === props.appState.currentEvent} event={event} onClick={() => onEventClick(event.guid)} />)}
-        <Button onClick={addEvent} >
-          <AddCircleOutlineIcon style={{ width: '57px', height: '40px'}} />
-        </Button>
+            <Event key={index} isCurrent={event.guid === props.appState.currentEvent} event={event} onClick={() => onEventClick(event.guid)} />)}
+            <Button onClick={addEvent} >
+              <AddCircleOutlineIcon style={{ width: '57px', height: '40px'}} />
+            </Button>
     </div>
   );
 }

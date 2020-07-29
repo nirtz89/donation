@@ -12,16 +12,16 @@ function Event(props) {
   }))(Tooltip);
 
   return (
-    <HtmlTooltip placement="top" arrow
-    title={
-      <React.Fragment>
-        <Typography color="inherit">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolorem.</Typography>
-      </React.Fragment>
-    }>
+    // <HtmlTooltip placement="top" arrow
+    // title={
+    //   <React.Fragment>
+    //     <Typography color="inherit">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolorem.</Typography>
+    //   </React.Fragment>
+    // }>
 <Button className={`Event ${props.isCurrent ? 'current' : ''}`} onClick={props.onClick}>
-  { props.event.type ?
+  { props.event.type && props.event.startTime && props.event.endTime ?
   (<>{ props.event.type }<br/> {`${props.event.startTime}-${props.event.endTime}`}</>) : 'New Event'}</Button>
-    </HtmlTooltip>
+    // </HtmlTooltip>
   );
 }
 

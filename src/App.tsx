@@ -28,14 +28,14 @@ export enum IEventType {
 
 export interface IEvent {
   guid: string;
-  type: IEventType;
-  location: {lat: number, lon: number};
-  people: IPeople[],
-  startTime: string;
-  endTime: string;
-  numberOfPeople: number,
-  transportation: ITransportationType;
-  maskOn: boolean;
+  type?: IEventType;
+  location?: {lat: number, lon: number};
+  people?: IPeople[],
+  startTime?: string;
+  endTime?: string;
+  numberOfPeople?: number,
+  transportation?: ITransportationType;
+  maskOn?: boolean;
   currentQuestion: number;
 }
 
@@ -77,23 +77,15 @@ const App = (props) => {
     const endDate = testDate ? testDate : new Date();
     const startDate = moment(endDate).add(-13, 'days').toDate();
 
-    const eventMock: IEvent = {
+    const initEvent: IEvent = {
         guid: uuidv4(),
-        type: IEventType.Home,
-        maskOn: true,
-        numberOfPeople: 2,
-        people: [],
-        location: { lat: 1, lon: 1},
-        transportation: ITransportationType.Walk,
-        startTime: '8:00',
-        endTime: '10:00',
         currentQuestion: 0
   }
   const initState: IAppState = {
     currentDate: startDate.toLocaleDateString(),
-    currentEvent: eventMock.guid,
+    currentEvent: initEvent.guid,
     days: {
-        [startDate.toLocaleDateString()]: {events: [eventMock], done: true }
+        [startDate.toLocaleDateString()]: {events: [initEvent], done: true }
     },
     questions: [
     {

@@ -17,7 +17,7 @@ const AppCalendar = (props: ICalendarProps) => {
 
     const handleChange = (date: any) => {
         setClickedDate(date);
-        const newState = { ...props.appState, currentDate: date };
+        const newState = { ...props.appState, currentDate: date.toLocaleDateString() };
         props.setAppState(newState);
     };
 

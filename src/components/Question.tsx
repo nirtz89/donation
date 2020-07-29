@@ -1,7 +1,7 @@
 import React, { useEffect, Dispatch, SetStateAction, useState } from 'react';
 import './Question.scss';
 import { IQuestionType, IQuestion, ITransportationType, IAppState, IEventType } from '../App';
-import { Button, Select, MenuItem, FormControl } from '@material-ui/core';
+import { Button, Select, MenuItem, FormControl, TextField } from '@material-ui/core';
 
 export interface IQuestionProps {
     question: IQuestion;
@@ -16,7 +16,7 @@ function Question(props: IQuestionProps) {
     const [eventTypeState,setEventTypeState] = useState('Gym');
     const [transState,setTransState] = useState('Taxi');
 
-    console.log(props.appState.days);
+    // console.log(props.appState.days);
 
     useEffect(() => {
         props.setLocation('');
@@ -30,6 +30,7 @@ function Question(props: IQuestionProps) {
             console.error('event not found!');
             return;
         }
+        console.log(event.guid);
         event.currentQuestion++;
         const index = state.days[state.currentDate].events.indexOf(event);
         state.days[state.currentDate].events.splice(index, 1);
@@ -101,8 +102,33 @@ function Question(props: IQuestionProps) {
             break;
             case IQuestionType.Hours:
                 toReturn = (<>
-                    <input id='from-input' type="number" placeholder="FROM" />
-                    <input id='to-input' type="number" placeholder="TO" />
+                    <TextField
+                        id="from-input"
+                        label="From"
+                        type="time"
+                        defaultValue="07:30"
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                        inputProps={{
+                        step: 300, // 5 min
+                        }}
+                    />
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <TextField
+                        id="to-input"
+                        label="To"
+                        type="time"
+                        defaultValue="07:45"
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                        inputProps={{
+                        step: 300, // 5 min
+                        }}
+                    />
                     <br/>
                     <br/>
                     <Button variant="contained" color="primary" onClick={() => onClick((document.getElementById('from-input') as any).value, (document.getElementById('to-input') as any).value)}>
