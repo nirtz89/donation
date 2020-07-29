@@ -96,12 +96,6 @@ const App = (props) => {
         [startDate.toLocaleDateString()]: {events: [eventMock], done: true }
     },
     questions: [
-      /*{
-        guid: uuidv4(),
-        type: IQuestionType.EventType,
-        question: 'Select event type',
-        updateEvent: (event: IEvent, type: IEventType) => ({ ...event, type })
-      },*/
     {
       guid: uuidv4(),
       type: IQuestionType.Location,
@@ -112,7 +106,7 @@ const App = (props) => {
         guid: uuidv4(),
         type: IQuestionType.EventType,
         question: 'What sort of place this is?',
-        updateEvent: (event) => event
+        updateEvent: (event: IEvent, type: IEventType) => ({ ...event, type })
     },
     {
     guid: uuidv4(),
