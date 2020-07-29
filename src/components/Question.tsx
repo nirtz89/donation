@@ -1,6 +1,6 @@
 import React, { useEffect, Dispatch, SetStateAction } from 'react';
 import './Question.scss';
-import { IQuestionType, IQuestion, ITransportationType, IAppState } from '../App';
+import { IQuestionType, IQuestion, ITransportationType, IAppState, IEventType } from '../App';
 import { Button } from '@material-ui/core';
 
 export interface IQuestionProps {
@@ -15,9 +15,9 @@ function Question(props: IQuestionProps) {
 
     useEffect(() => {
         props.setLocation('');
-    }, []);
+    }, [props]);
 
-      const onClick = (...params) => {
+    const onClick = (...params) => {
         const state = { ...props.appState};
         let event = state.days[state.currentDate].events.find(event => event.guid === state.currentEvent);
         event = props.question.updateEvent(event, ...params);
@@ -30,6 +30,25 @@ function Question(props: IQuestionProps) {
         state.days[state.currentDate].events.splice(index, 1);
         state.days[state.currentDate].events.push(event);
         props.setAppState(state);
+    }
+
+    const renderOptionsQuestion = (enumType: any) => {
+        let items: any[] = [];
+        let index = 0;
+        for (let item in enumType) {
+            items.push(<option key={index}>{item}</option>);
+            index++;
+        }
+        return (
+        <>
+            <select >
+                {items}
+            </select>
+            <Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2}} onClick={onClick}>
+                    Next
+            </Button>
+        </>
+        )
     }
 
     const makeQuestion = (question: IQuestion) => {
@@ -51,6 +70,10 @@ function Question(props: IQuestionProps) {
                         Next
                     </Button>
                     </>)
+            break;
+            case IQuestionType.EventType:
+                toReturn = renderOptionsQuestion(IEventType);
+
             break;
             case IQuestionType.Number:
                 toReturn = (<>
@@ -84,23 +107,14 @@ function Question(props: IQuestionProps) {
                     </>)
             break;
             case IQuestionType.Transportation:
-                let items: any[] = [];
-                let index = 0;
-                for (let item in ITransportationType) {
-                    items.push(<option key={index}>{item}</option>);
-                    index++;
-                }
-                toReturn = (
-                <>
-                    <select >
-                        {items}
-                    </select>
-                </>
-                )
+                toReturn = renderOptionsQuestion(ITransportationType);
             break;
         }
         return toReturn;
     }
+
+
+
 
   return (
     <div className="Question">

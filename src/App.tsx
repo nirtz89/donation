@@ -109,6 +109,12 @@ const App = (props) => {
       updateEvent: (event) => event
     },
     {
+        guid: uuidv4(),
+        type: IQuestionType.EventType,
+        question: 'What sort of place this is?',
+        updateEvent: (event) => event
+    },
+    {
     guid: uuidv4(),
     type: IQuestionType.Hours,
     question: 'At what hours?',
