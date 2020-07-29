@@ -1,7 +1,7 @@
-import React, { useEffect, Dispatch, SetStateAction } from 'react';
+import React, { useEffect, Dispatch, SetStateAction, useState } from 'react';
 import './Question.scss';
 import { IQuestionType, IQuestion, ITransportationType, IAppState, IEventType } from '../App';
-import { Button } from '@material-ui/core';
+import { Button, Select, MenuItem, FormControl } from '@material-ui/core';
 
 export interface IQuestionProps {
     question: IQuestion;
@@ -12,6 +12,11 @@ export interface IQuestionProps {
 }
 
 function Question(props: IQuestionProps) {
+
+    const [eventTypeState,setEventTypeState] = useState('Gym');
+    const [transState,setTransState] = useState('Taxi');
+
+    console.log(props.appState.days);
 
     useEffect(() => {
         props.setLocation('');
@@ -36,15 +41,24 @@ function Question(props: IQuestionProps) {
         let items: any[] = [];
         let index = 0;
         for (let item in enumType) {
-            items.push(<option key={index}>{item}</option>);
+            items.push(<MenuItem key={index} value={item}>{item}</MenuItem>);
             index++;
         }
         return (
         <>
-            <select >
-                {items}
-            </select>
-            <Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2}} onClick={onClick}>
+        <FormControl>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={enumType === ITransportationType ? transState : eventTypeState}
+          onChange={(event: any) => enumType === ITransportationType ? setTransState(event.target.value) : setEventTypeState(event.target.value)}
+        >
+            {items}
+        </Select>
+        </FormControl>
+        <br />
+        <br />
+            <Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2}} onClick={() => onClick(enumType === ITransportationType ? transState : eventTypeState)}>
                     Next
             </Button>
         </>
