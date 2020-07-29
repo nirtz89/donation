@@ -1,8 +1,15 @@
 .Container {
-    width: 60vw;
-    height: 60vh;
+    width: 70vw;
+    height: 70vh;
     box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.1);
     margin: 0 auto;
     display: flex;
     background: url('http://www.ansonika.com/magnifica/img/pattern_1.png');
+}
+
+.logo-container {
+    width: 70vw;
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 2em;
 }

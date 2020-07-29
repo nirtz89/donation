@@ -3,7 +3,8 @@
     background: rgba(245, 245, 245, 0.5);
     border-radius: 1em;
     font-size: 14px;
-    width: 95px;
+    min-width: 95px !important;
+    max-width: 95px !important;
     text-align: center;
     margin-right: 0.5em !important;
     &:hover {

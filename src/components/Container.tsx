@@ -17,6 +17,9 @@ function Container(props: IContainerProps) {
 
   return (
     <>
+    <div className="logo-container">
+      <img src="/epdi_web_logo.png" alt="" style={{width:200}}/>
+    </div>
     <div className="Container">
       <Sidebar {...props} />
       <Main {...props}   />

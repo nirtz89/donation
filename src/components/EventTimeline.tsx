@@ -1,4 +1,4 @@
-import React, { useRef, Dispatch, SetStateAction } from 'react';
+import React, { useRef, Dispatch, SetStateAction, useLayoutEffect } from 'react';
 import Event from './Event'
 import './EventTimeline.scss';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
@@ -9,8 +9,17 @@ import { v4 as uuidv4 } from 'uuid';
 function EventTimeline(props: { appState: IAppState, setAppState: Dispatch<SetStateAction<IAppState>> }) {
 
   const eventTimeLineRef = useRef<HTMLDivElement>(null);
+  eventTimeLineRef.current?.scrollTo(9999999, 0);
 
-  eventTimeLineRef.current?.scrollTo(9999, 0);
+  useLayoutEffect(()=>{
+    console.log("TIMELINE RENDERED");
+    console.log(eventTimeLineRef.current);
+    console.log(eventTimeLineRef.current?.childElementCount);
+    console.log(props.appState.currentEvent);
+    eventTimeLineRef.current?.scrollTo(9999999, 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[props.appState.currentEvent])
+
   const onEventClick = (id) => {
     const newState =  { ...props.appState, currentEvent: id };
     props.setAppState(newState);
@@ -42,7 +51,7 @@ function EventTimeline(props: { appState: IAppState, setAppState: Dispatch<SetSt
     <div className="EventTimeline" ref={eventTimeLineRef}>
         {props.appState.days && props.appState.days[props.appState.currentDate!] && props.appState.days[props.appState.currentDate!].events.map((event, index)=>
             <Event key={index} isCurrent={event.guid === props.appState.currentEvent} event={event} onClick={() => onEventClick(event.guid)} />)}
-            <Button onClick={addEvent} >
+            <Button onClick={addEvent}>
               <AddCircleOutlineIcon style={{ width: '57px', height: '40px'}} />
             </Button>
     </div>
