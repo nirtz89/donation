@@ -16,8 +16,6 @@ function Question(props: IQuestionProps) {
     const [eventTypeState,setEventTypeState] = useState('Gym');
     const [transState,setTransState] = useState('Taxi');
 
-    // console.log(props.appState.days);
-
     useEffect(() => {
         props.setLocation('');
     }, [props]);
@@ -30,7 +28,6 @@ function Question(props: IQuestionProps) {
             console.error('event not found!');
             return;
         }
-        console.log(event.guid);
         event.currentQuestion++;
         const index = state.days[state.currentDate].events.indexOf(event);
         state.days[state.currentDate].events.splice(index, 1);

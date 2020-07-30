@@ -39,14 +39,6 @@ function EventTimeline(props: { appState: IAppState, setAppState: Dispatch<SetSt
     props.setAppState(newState);
   };
 
-  if (props.appState.days && (!props.appState.days[props.appState.currentDate!] || !props.appState.days[props.appState.currentDate!].events.length)) {
-    // addEvent();
-  }
-
-  console.log(props.appState.days);
-  console.log(props.appState.days[props.appState.currentDate!]);
-  // console.log(props.appState.days[props.appState.currentDate!].events);
-
   return (
     <div className="EventTimeline" ref={eventTimeLineRef}>
         {props.appState.days && props.appState.days[props.appState.currentDate!] && props.appState.days[props.appState.currentDate!].events.map((event, index)=>

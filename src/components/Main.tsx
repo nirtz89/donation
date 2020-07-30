@@ -4,6 +4,7 @@ import Question from './Question';
 import EventTimeline from './EventTimeline';
 import { IAppState } from '../App';
 import EventSummary from './Events/EventSummary';
+import UserSummary from './UserSummary';
 
 export interface IMainProps {
     appState: IAppState;
@@ -14,7 +15,7 @@ export interface IMainProps {
 
 const Main = (props: IMainProps) => {
 
-  console.log(props.appState.days);
+  console.log('days %o', props.appState.days);
 
   const isCurrentEventFull = () => {
     let currEvent: any = null;
@@ -25,17 +26,37 @@ const Main = (props: IMainProps) => {
   };
   console.log("IS CURRENT EVENT FINISHED? " + isCurrentEventFull());
 
+
+  const isInqFinish = () => {
+    const days = Object.keys(props.appState.days);
+    if (days.length < 14) {
+        return false;
+    }
+    for (let day in props.appState.days) {
+        if (!props.appState.days[day].done) {
+            return false;
+        }
+    }
+    return true;
+  }
+
   let event = props.appState.days[props.appState.currentDate] && props.appState.days[props.appState.currentDate].events.find(event => event!.guid === props.appState.currentEvent);
   return (
     <div className="Main">
-        <EventTimeline appState={props.appState} setAppState={props.setAppState} />
-        <div className="QuestionWrapper">
-            {event && props.appState.questions[event.currentQuestion] ?
-            <Question question={props.appState.questions[event.currentQuestion]} {...props} />
-            :
-            isCurrentEventFull() ? <EventSummary {...props} event={event} /> : "Add a new event to start."
-            }
-        </div>
+        {isInqFinish() ? (<UserSummary appState={props.appState} />) :
+        (
+            <>
+                <EventTimeline appState={props.appState} setAppState={props.setAppState} />
+                <div className="QuestionWrapper">
+                    {event && props.appState.questions[event.currentQuestion] ?
+                    <Question question={props.appState.questions[event.currentQuestion]} {...props} />
+                    :
+                    isCurrentEventFull() ? <EventSummary {...props} event={event} /> : "Add a new event to start."
+                    }
+                </div>
+            </>
+        )
+    }
     </div>
   );
 };
