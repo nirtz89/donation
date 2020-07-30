@@ -1,10 +1,11 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import './Main.scss';
 import Question from './Question';
 import EventTimeline from './EventTimeline';
 import { IAppState } from '../App';
 import EventSummary from './Events/EventSummary';
 import UserSummary from './UserSummary';
+import { Button } from '@material-ui/core';
 
 export interface IMainProps {
     appState: IAppState;
@@ -15,16 +16,17 @@ export interface IMainProps {
 
 const Main = (props: IMainProps) => {
 
-  console.log('days %o', props.appState.days);
+    const [inqDone, setInqDone] = useState(false);
 
-  const isCurrentEventFull = () => {
+    console.log('days %o', props.appState.days);
+    const isCurrentEventFull = () => {
     let currEvent: any = null;
     if (props.appState.days[props.appState.currentDate]) {
       currEvent = props.appState.days[props.appState.currentDate].events.find((ev)=>ev.guid===props.appState.currentEvent) ?? undefined;
     }
     return currEvent && currEvent.currentQuestion === props.appState.questions.length;
-  };
-  console.log("IS CURRENT EVENT FINISHED? " + isCurrentEventFull());
+    };
+    console.log("IS CURRENT EVENT FINISHED? " + isCurrentEventFull());
 
 
   const isInqFinish = () => {
@@ -43,7 +45,7 @@ const Main = (props: IMainProps) => {
   let event = props.appState.days[props.appState.currentDate] && props.appState.days[props.appState.currentDate].events.find(event => event!.guid === props.appState.currentEvent);
   return (
     <div className="Main">
-        {isInqFinish() ? (<UserSummary appState={props.appState} />) :
+        {inqDone ? (<UserSummary appState={props.appState} />) :
         (
             <>
                 <EventTimeline appState={props.appState} setAppState={props.setAppState} />
@@ -53,6 +55,9 @@ const Main = (props: IMainProps) => {
                     :
                     isCurrentEventFull() ? <EventSummary {...props} event={event} /> : "Add a new event to start."
                     }
+                </div>
+                <div>
+                    {isInqFinish() ? (<Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2, margin: '0 auto'}} onClick={() => {setInqDone(true)}}>Finish inquiry</Button>) : null}
                 </div>
             </>
         )
