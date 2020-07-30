@@ -1,7 +1,8 @@
 import React, { useEffect, Dispatch, SetStateAction, useState } from 'react';
 import './Question.scss';
 import { IQuestionType, IQuestion, ITransportationType, IAppState, IEventType } from '../App';
-import { Button, Select, MenuItem, FormControl, TextField } from '@material-ui/core';
+import { Button, Select, MenuItem, FormControl, TextField, IconButton } from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 export interface IQuestionProps {
     question: IQuestion;
@@ -115,7 +116,7 @@ function Question(props: IQuestionProps) {
                     <div className="question-wrapper">
                         <TextField
           id="number-input"
-          label="Number"
+          label="Number of people"
           type="number"
           InputLabelProps={{
             shrink: true,
@@ -192,9 +193,10 @@ function Question(props: IQuestionProps) {
     <div className="Question">
       <h2>{props.question.question}</h2>
       {makeQuestion(props.question)}
-      {renderBackClick() && <div className="back-button"><a href="#" onClick={() => backClick()}>
-        Go back
-      </a>
+      {renderBackClick() && <div className="back-button">
+        <IconButton color="primary" aria-label="go back" onClick={() => backClick()}>
+  <ArrowBackIcon />
+</IconButton>
       </div>}
     </div>
   );
