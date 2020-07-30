@@ -20,7 +20,7 @@ function Question(props: IQuestionProps) {
         props.setLocation('');
     }, [props]);
 
-    const onClick = (...params) => {
+    const nextClick = (...params) => {
         const state = { ...props.appState};
         let event = state.days[state.currentDate].events.find(event => event.guid === state.currentEvent);
         event = props.question.updateEvent(event, ...params);
@@ -32,6 +32,17 @@ function Question(props: IQuestionProps) {
         const index = state.days[state.currentDate].events.indexOf(event);
         state.days[state.currentDate].events.splice(index, 1);
         state.days[state.currentDate].events.push(event);
+        props.setAppState(state);
+    }
+
+    const backClick = () => {
+        const state = { ...props.appState};
+        let event = state.days[state.currentDate].events.find(event => event.guid === state.currentEvent);
+        if (!event) {
+            console.error('event not found!');
+            return;
+        }
+        event.currentQuestion--;
         props.setAppState(state);
     }
 
@@ -56,7 +67,7 @@ function Question(props: IQuestionProps) {
         </FormControl>
         <br />
         <br />
-            <Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2}} onClick={() => onClick(enumType === ITransportationType ? transState : eventTypeState)}>
+            <Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2}} onClick={() => nextClick(enumType === ITransportationType ? transState : eventTypeState)}>
                     Next
             </Button>
         </>
@@ -68,9 +79,9 @@ function Question(props: IQuestionProps) {
         switch (question.type) {
             case IQuestionType.Bool:
                 toReturn = (<>
-                <Button variant="contained" color="primary" onClick={() => onClick(true)}>Yes</Button>
+                <Button variant="contained" color="primary" onClick={() => nextClick(true)}>Yes</Button>
                 &nbsp;&nbsp;&nbsp;
-                <Button variant="contained" color="secondary" onClick={() => onClick(false)}>No</Button>
+                <Button variant="contained" color="secondary" onClick={() => nextClick(false)}>No</Button>
                 </>)
             break;
             case IQuestionType.Location:
@@ -78,7 +89,7 @@ function Question(props: IQuestionProps) {
                     <div id="location-div" style={{ position: 'relative', maxWidth: '300px', top: '16px'}} />
                     <br/>
                     <br/>
-                    <Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2}} onClick={onClick}>
+                    <Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2}} onClick={nextClick}>
                         Next
                     </Button>
                     </>)
@@ -92,7 +103,7 @@ function Question(props: IQuestionProps) {
                     <input id="number-input" type="number" placeholder="NUMBER"/>
                     <br/>
                     <br/>
-                    <Button variant="contained" color="primary" onClick={() => onClick((document.getElementById('number-input') as any).value)}>
+                    <Button variant="contained" color="primary" onClick={() => nextClick((document.getElementById('number-input') as any).value)}>
                         Next
                     </Button>
                     </>)
@@ -128,7 +139,7 @@ function Question(props: IQuestionProps) {
                     />
                     <br/>
                     <br/>
-                    <Button variant="contained" color="primary" onClick={() => onClick((document.getElementById('from-input') as any).value, (document.getElementById('to-input') as any).value)}>
+                    <Button variant="contained" color="primary" onClick={() => nextClick((document.getElementById('from-input') as any).value, (document.getElementById('to-input') as any).value)}>
                         Next
                     </Button>
                     </>)
@@ -138,7 +149,7 @@ function Question(props: IQuestionProps) {
                     <input id='person-name-input' placeholder="PEOPLE"/>
                     <br/>
                     <br/>
-                    <Button variant="contained" color="primary" onClick={() => onClick((document.getElementById('person-name-input') as any).value)}>
+                    <Button variant="contained" color="primary" onClick={() => nextClick((document.getElementById('person-name-input') as any).value)}>
                         Next
                     </Button>
                     </>)
@@ -150,13 +161,13 @@ function Question(props: IQuestionProps) {
         return toReturn;
     }
 
-
-
-
   return (
     <div className="Question">
       <h2>{props.question.question}</h2>
       {makeQuestion(props.question)}
+      <Button variant="contained" color="secondary" onClick={() => backClick()}>
+        Back
+      </Button>
     </div>
   );
 }
