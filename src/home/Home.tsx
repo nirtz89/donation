@@ -9,7 +9,12 @@ const Home = () => {
     const [date, setDate] = useState(null);
 
     return (
+        <>
         <div className="Home-container">
+            
+        <div className="logo-container">
+          <img src="/epdi_web_logo.png" alt="" style={{width:200}}/>
+        </div>
             <div className="Home">
                 <Typography variant="h1" gutterBottom>Welcome to your<br/>Epdimology Inquiry</Typography>
                 <img src="/floatingPeople.gif" alt="covid19" className="welcome-img" />
@@ -23,6 +28,7 @@ const Home = () => {
                 <img className="gov-logo" src="https://upload.wikimedia.org/wikipedia/he/f/fb/Israeli_Ministry_of_Health_logo.png" alt=""/>
             </div>
         </div>
+        </>
       );
     }
 
