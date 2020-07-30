@@ -46,6 +46,16 @@ function Question(props: IQuestionProps) {
         props.setAppState(state);
     }
 
+    const renderBackClick = () => {
+        const state = { ...props.appState};
+        let event = state.days[state.currentDate].events.find(event => event.guid === state.currentEvent);
+        if (!event) {
+            console.error('event not found!');
+            return;
+        }
+        return event.currentQuestion > 0;
+    }
+
     const renderOptionsQuestion = (enumType: any) => {
         let items: any[] = [];
         let index = 0;
@@ -182,10 +192,10 @@ function Question(props: IQuestionProps) {
     <div className="Question">
       <h2>{props.question.question}</h2>
       {makeQuestion(props.question)}
-      <div className="back-button"><a href="#" onClick={() => backClick()}>
+      {renderBackClick() && <div className="back-button"><a href="#" onClick={() => backClick()}>
         Go back
       </a>
-      </div>
+      </div>}
     </div>
   );
 }
