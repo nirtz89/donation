@@ -4,8 +4,15 @@
     text-align: left;
     padding: 32px;
     border-left: 1px solid #efefef;
+    position: relative;
 }
 
 .QuestionWrapper {
     margin-bottom: 2em;
+}
+
+.inq-button {
+    position: absolute;
+    bottom: 2em;
+    right: 2em;
 }

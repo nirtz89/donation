@@ -31,7 +31,7 @@ const Main = (props: IMainProps) => {
 
   const isInqFinish = () => {
     const days = Object.keys(props.appState.days);
-    if (days.length < 14) {
+    if (days.length < 2) {
         return false;
     }
     for (let day in props.appState.days) {
@@ -56,8 +56,8 @@ const Main = (props: IMainProps) => {
                     isCurrentEventFull() ? <EventSummary {...props} event={event} /> : "Add a new event to start."
                     }
                 </div>
-                <div>
-                    {isInqFinish() ? (<Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2, margin: '0 auto'}} onClick={() => {setInqDone(true)}}>Finish inquiry</Button>) : null}
+                <div className="inq-button">
+                    {isInqFinish() ? (<Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2, margin: '0 auto'}}  onClick={() => {setInqDone(true)}}>Finish inquiry</Button>) : null}
                 </div>
             </>
         )
