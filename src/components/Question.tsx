@@ -1,7 +1,8 @@
 import React, { useEffect, Dispatch, SetStateAction, useState } from 'react';
 import './Question.scss';
 import { IQuestionType, IQuestion, ITransportationType, IAppState, IEventType } from '../App';
-import { Button, Select, MenuItem, FormControl, TextField } from '@material-ui/core';
+import { Button, Select, MenuItem, FormControl, TextField, IconButton } from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 export interface IQuestionProps {
     question: IQuestion;
@@ -65,6 +66,8 @@ function Question(props: IQuestionProps) {
         }
         return (
         <>
+        
+        <div className="question-wrapper">
         <FormControl>
         <Select
           labelId="demo-simple-select-label"
@@ -75,9 +78,8 @@ function Question(props: IQuestionProps) {
             {items}
         </Select>
         </FormControl>
-        <br />
-        <br />
-            <Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2}} onClick={() => nextClick(enumType === ITransportationType ? transState : eventTypeState)}>
+        </div>
+            <Button variant="contained" color="primary" style={{zIndex: 2}} onClick={() => nextClick(enumType === ITransportationType ? transState : eventTypeState)}>
                     Next
             </Button>
         </>
@@ -89,30 +91,38 @@ function Question(props: IQuestionProps) {
         switch (question.type) {
             case IQuestionType.Bool:
                 toReturn = (<>
-                <Button variant="contained" color="primary" onClick={() => nextClick(true)}>Yes</Button>
-                &nbsp;&nbsp;&nbsp;
-                <Button variant="contained" color="secondary" onClick={() => nextClick(false)}>No</Button>
+                <div className="question-wrapper">
+                    <Button variant="contained" color="primary" onClick={() => nextClick(true)}>Yes</Button>
+                    &nbsp;&nbsp;&nbsp;
+                    <Button variant="contained" color="secondary" onClick={() => nextClick(false)}>No</Button>
+                </div>
                 </>)
             break;
             case IQuestionType.Location:
                 toReturn = (<>
-                    <div id="location-div" style={{ position: 'relative', maxWidth: '300px', top: '16px'}} />
-                    <br/>
-                    <br/>
-                    <Button variant="contained" color="primary" style={{marginTop:'1em', zIndex: 2}} onClick={nextClick}>
+                    <div className="question-wrapper">
+                        <div id="location-div" style={{ position: 'relative', maxWidth: '300px', top: '16px'}} />
+                    </div>
+                    <Button variant="contained" color="primary" style={{zIndex: 2}} onClick={nextClick}>
                         Next
                     </Button>
                     </>)
             break;
             case IQuestionType.EventType:
                 toReturn = renderOptionsQuestion(IEventType);
-
             break;
             case IQuestionType.Number:
                 toReturn = (<>
-                    <input id="number-input" type="number" placeholder="NUMBER"/>
-                    <br/>
-                    <br/>
+                    <div className="question-wrapper">
+                        <TextField
+          id="number-input"
+          label="Number of people"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+                    </div>
                     <Button variant="contained" color="primary" onClick={() => nextClick((document.getElementById('number-input') as any).value)}>
                         Next
                     </Button>
@@ -120,6 +130,8 @@ function Question(props: IQuestionProps) {
             break;
             case IQuestionType.Hours:
                 toReturn = (<>
+                
+                <div className="question-wrapper">
                     <TextField
                         id="from-input"
                         label="From"
@@ -147,8 +159,7 @@ function Question(props: IQuestionProps) {
                         step: 300, // 5 min
                         }}
                     />
-                    <br/>
-                    <br/>
+                    </div>
                     <Button variant="contained" color="primary" onClick={() => nextClick((document.getElementById('from-input') as any).value, (document.getElementById('to-input') as any).value)}>
                         Next
                     </Button>
@@ -156,9 +167,16 @@ function Question(props: IQuestionProps) {
             break;
             case IQuestionType.People:
                 toReturn = (<>
-                    <input id='person-name-input' placeholder="PEOPLE"/>
-                    <br/>
-                    <br/>
+                    <div className="question-wrapper">
+                        <TextField
+                            id="person-name-input"
+                            label="Number"
+                            type="number"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            />
+                    </div>
                     <Button variant="contained" color="primary" onClick={() => nextClick((document.getElementById('person-name-input') as any).value)}>
                         Next
                     </Button>
@@ -175,11 +193,11 @@ function Question(props: IQuestionProps) {
     <div className="Question">
       <h2>{props.question.question}</h2>
       {makeQuestion(props.question)}
-      {renderBackClick() ? <Button variant="contained" color="secondary" onClick={() => backClick()}>
-                         Back
-                        </Button>
-                        : null
-     }
+      {renderBackClick() && <div className="back-button">
+        <IconButton color="primary" aria-label="go back" onClick={() => backClick()}>
+  <ArrowBackIcon />
+</IconButton>
+      </div>}
     </div>
   );
 }

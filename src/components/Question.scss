@@ -25,3 +25,16 @@
 .geocoder-control {
     margin-bottom: 1em !important;
 }
+
+.back-button {
+    position: absolute;
+    bottom: 1em;
+    a {
+        color: #3f51b5;
+        font-size: 12px;
+    }
+}
+
+.question-wrapper {
+    height: 80px;
+}
